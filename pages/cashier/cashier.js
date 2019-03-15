@@ -17,6 +17,7 @@ Page({
    * 余额支付
    */
   balancePay: function (orderId, amount) {
+
     var that = this;
     WXAPI.orderPay(orderId, wx.getStorageSync('token')).then(function (res) {
       if(res.code == 0){
@@ -89,10 +90,23 @@ Page({
       wx.hideLoading();
       return;
     }
-    console.log(wxNeedPay+"---"+amount);
+
     if(wxNeedPay <= 0){
-      //使用余额支付
-      that.balancePay(orderId, amount);
+      wx.hideLoading();
+      wx.showModal({
+        title: '提示',
+        content: '您将使用余额支付'+amount+'元',
+        success:function(res){
+          if (res.cancel) {
+            //点击取消,默认隐藏弹框
+            return;
+          } else {
+            //使用余额支付
+            that.balancePay(orderId, amount);
+          }
+        }
+      });
+      
     }else{
      //余额不够，将使用组合支付，或者全部微信支付的方式
       wxpay.wxpay(app, wxNeedPay, orderId, "/pages/pay-result/index?amount=" + amount);

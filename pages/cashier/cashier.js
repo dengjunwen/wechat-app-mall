@@ -149,20 +149,13 @@ Page({
    */
   rechargeAmount:function(e){
     var confine = e.currentTarget.dataset.confine;
-    var amount = confine;
-    this.setData({
-      amount: amount
-    });
-    this.recharge(amount);
+     this.recharge(confine);
+    this.checkBindPhoneNum();
   },
   recharge:function(amount){
     //充值后检查有没有绑定手机号，如果没有绑定，则提示绑定手机号
     var that = this;
-    this.setData({
-      amount: amount
-    });
     wxpay.wxpay(app, amount, 0, "");
-    that.checkBindPhoneNum();
   },
   checkBindPhoneNum:function(){
     WXAPI.userDetail(wx.getStorageSync('token')).then(function (res) {

@@ -4,11 +4,11 @@
 
    <view class="swiper-container">
          
-        <swiper class="swiper_box" 
-                    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
+        <swiper class="swiper_box"  style='height:{{bannerHeight}}rpx;' 
+                    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange" >
             <block wx:for="{{banners}}" wx:key="id">
                 <swiper-item>
-                    <image bindtap="tapBanner" data-id="{{item.businessId}}" src="{{item.picUrl}}_m" class="slide-image" width="750rpx" height="562.5rpx"/>
+                    <image bindtap="tapBanner" data-id="{{item.businessId}}" src="{{item.picUrl}}_m" class="slide-image" style='height:{{bannerHeight}}rpx;' />
                 </swiper-item>
             </block>
         </swiper>

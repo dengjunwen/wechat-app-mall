@@ -62,6 +62,11 @@ App({
         wx.setStorageSync('mallName', res.data.value);
       }
     })
+    WXAPI.queryConfig({key: 'bannerHeight'}).then(function (res) {
+      if (res.code == 0) {
+        wx.setStorageSync('bannerHeight', res.data.value);
+      }
+    });
     WXAPI.scoreRules({
       code: 'goodReputation'
     }).then(function(res) {
